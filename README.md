@@ -1,1 +1,1 @@
-Repositorio creado para la Primera Pre Entrega de la cursada de JavaScript en CoderHouse
+Repositorio creado para la Segunda Pre Entrega de la cursada de JavaScript en CoderHouse

@@ -1,19 +1,19 @@
 {
-  "name": "preentrega1romero",
-  "version": "1.0.0",
-  "description": "Repositorio creado para la Primera Pre Entrega de la cursada de JavaScript en CoderHouse",
+  "name": "preEntrega2Romero",
+  "version": "1.2.0",
+  "description": "Repositorio creado para la Segunda Pre Entrega de la cursada de JavaScript en CoderHouse",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/carlosrm22/PreEntrega1Romero.git"
+    "url": "git+https://github.com/carlosrm22/PreEntrega2Romero.git"
   },
   "author": "Carlos Romero Muñoz",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/carlosrm22/PreEntrega1Romero/issues"
+    "url": "https://github.com/carlosrm22/PreEntrega2Romero/issues"
   },
-  "homepage": "https://github.com/carlosrm22/PreEntrega1Romero#readme"
+  "homepage": "https://github.com/carlosrm22/PreEntrega2Romero#readme"
 }
