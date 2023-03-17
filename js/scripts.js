@@ -19,6 +19,7 @@ let fechaNacimiento;
 let fechaInscripcion;
 let fechaInicio;
 let fechaFin;
+let nivelElegido;
 let costo;
 let pago;
 let pagoTotal;
@@ -88,11 +89,11 @@ while (!correoValido) {
 
 console.log("Correo electrónico del alumno:", correo);
 
-// Capturar teléfono del alumno validando que sean solo números
+// Capturar teléfono del alumno validando que sean solo números y no acepte más de 10 dígitos
 let telefonoValido = false;
 while (!telefonoValido) {
-    telefono = prompt("Ingrese el número de teléfono del alumno (solo los números): ");
-    if (!isNaN(telefono)) {
+    telefono = prompt("Ingrese el número de teléfono del alumno (10 dígitos): ");
+    if (/^\d{10}$/.test(telefono)) {
         telefonoValido = true;
     } else {
         alert("El número de teléfono ingresado no es válido.");
@@ -132,14 +133,27 @@ fechaInscripcion = new Date();
 console.log("Fecha de inscripción del alumno:", fechaInscripcion.toLocaleDateString());
 
 //Array de los niveles a los que puede inscribirse
-let niveles = ["Nido & Comunidad Infantil", "Casa de Niños", "Taller 1 & 2"];
+let niveles = ["(1) Nido & Comunidad Infantil", "(2) Casa de Niños", "(3) Taller 1 & 2"];
 
 // Usando el método join para mostrar los niveles en el navegador
-alert("Niveles disponibles:\n\n" + niveles.join("\n"));
+alert("Elige uno de los niveles disponibles:\n\n" + niveles.join("\n"));
 
-let nivelElegido = prompt("Ingrese el número del nivel al que desea inscribirse: ");
+// validar que solo acepte números que correspondan a un nivel existente
+// Se declara la variable en false para iniciar el ciclo while
+let nivelValido = false;
+while (!nivelValido) {
+    nivelElegido = prompt("Ingrese el número del nivel al que desea inscribirse: ");
+    if (nivelElegido >= 1 && nivelElegido <= niveles.length) {
+        nivelValido = true;
+    } else {
+        alert(`Debe ingresar un número entre 1 y ${niveles.length}.`);
+    }
+}
+
+// Seleccionar el nivel elegido
 let nivelInscripcion = niveles[nivelElegido - 1];
 alert(`El alumno se ha inscrito en el nivel ${nivelInscripcion}`);
+
 
 // Capturar fecha de inicio del diplomado
 fechaInicio = new Date();
@@ -215,5 +229,5 @@ Pago total del alumno: ${pagoTotal}
 Pago restante del alumno: ${pagoRestante}`);
 
 // Dar la bienvenida al diplomado al alumno y dirigirlo a la página para que pueda empezar a tomarlo
-alert(`${nombres},bienvenido al diplomado para certificarte como Guía Montessori en el nivel ${nivelInscripcion} otorgado por la Asociación Montessori de México`);
+alert(`${nombres}, bienvenido al diplomado para certificarte como Guía Montessori en el nivel ${nivelInscripcion} otorgado por la Asociación Montessori de México`);
 window.location.href = "https://www.certificacionmontessori.com";
