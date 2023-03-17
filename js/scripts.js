@@ -229,7 +229,7 @@ alert(`Nombre del alumno: ${nombres}
     Teléfono: ${telefono}
     Dirección: ${direccion}, ${ciudad}, ${codigoPostal}, ${estado}, ${pais}
     Fecha de inscripción: ${fechaInscripcion.toLocaleDateString()}
-    Nivel de inscripción: ${nivelInscripcion}
+    Nivel de inscripción: ${nivelInscripcion.nombre}
     Fecha de inicio del diplomado: ${fechaInicio.toLocaleDateString()}
     Fecha de fin del diplomado: ${fechaFin.toLocaleDateString()}
     Costo del diplomado: ${costo}
@@ -246,7 +246,7 @@ console.log(`Nombre del alumno: ${nombres}
     Teléfono: ${telefono}
     Dirección: ${direccion}, ${ciudad}, ${codigoPostal}, ${estado}, ${pais}
     Fecha de inscripción: ${fechaInscripcion.toLocaleDateString()}
-    Nivel de inscripción: ${nivelInscripcion}
+    Nivel de inscripción: ${nivelInscripcion.nombre}
     Fecha de inicio del diplomado: ${fechaInicio.toLocaleDateString()}
     Fecha de fin del diplomado: ${fechaFin.toLocaleDateString()}
     Costo del diplomado: ${costo}
