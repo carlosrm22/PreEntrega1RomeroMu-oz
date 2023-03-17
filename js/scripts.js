@@ -25,6 +25,30 @@ let pago;
 let pagoTotal;
 let pagoRestante;
 
+// Definir costos y duraciones por nivel
+let niveles = [
+    {
+        nombre: "Tronco Común",
+        duracion: 6,
+        costo: 1500
+    },
+    {
+        nombre: "Nido & Comunidad Infantil",
+        duracion: 16,
+        costo: 3500
+    },
+    {
+        nombre: "Casa de Niños",
+        duracion: 17,
+        costo: 3850
+    },
+    {
+        nombre: "Taller 1 & 2",
+        duracion: 20,
+        costo: 4000
+    }
+];
+
 // Capturar el nombre del alumno usando el método trim para eliminar los espacios en blanco
 let nombres = prompt("Ingrese el nombre completo del alumno: ").trim();
 
@@ -132,44 +156,43 @@ fechaInscripcion = new Date();
 
 console.log("Fecha de inscripción del alumno:", fechaInscripcion.toLocaleDateString());
 
-//Array de los niveles a los que puede inscribirse
-let niveles = ["(1) Nido & Comunidad Infantil", "(2) Casa de Niños", "(3) Taller 1 & 2"];
+// Mostrar los niveles disponibles en el navegador
+let mensajeNiveles = "Niveles disponibles:\n\n";
+for (let i = 0; i < niveles.length; i++) {
+    let nivel = niveles[i];
+    mensajeNiveles += `${i + 1}. ${nivel.nombre} - Duración: ${nivel.duracion} meses - Costo: $${nivel.costo}.00 pesos mexicanos.\n`;
+}
+alert(mensajeNiveles);
 
-// Usando el método join para mostrar los niveles en el navegador
-alert("Elige uno de los niveles disponibles:\n\n" + niveles.join("\n"));
-
-// validar que solo acepte números que correspondan a un nivel existente
-// Se declara la variable en false para iniciar el ciclo while
-let nivelValido = false;
-while (!nivelValido) {
-    nivelElegido = prompt("Ingrese el número del nivel al que desea inscribirse: ");
-    if (nivelElegido >= 1 && nivelElegido <= niveles.length) {
-        nivelValido = true;
-    } else {
-        alert(`Debe ingresar un número entre 1 y ${niveles.length}.`);
-    }
+// Pedir al usuario que elija un nivel y validar la entrada
+nivelElegido = prompt("Ingrese el número del nivel al que desea inscribirse: ");
+while (nivelElegido < 1 || nivelElegido > niveles.length || isNaN(nivelElegido)) {
+    nivelElegido = prompt("El número ingresado no es válido. Ingrese el número del nivel al que desea inscribirse: ");
 }
 
-// Seleccionar el nivel elegido
+// Obtener el nivel seleccionado y sus propiedades
 let nivelInscripcion = niveles[nivelElegido - 1];
-alert(`El alumno se ha inscrito en el nivel ${nivelInscripcion}`);
+duracionDiplomado = nivelInscripcion.duracion;
+let costoDiplomado = nivelInscripcion.costo;
+
+alert(`El alumno se ha inscrito en el nivel ${nivelElegido} - Duración: ${duracionDiplomado} meses - Costo: ${costoDiplomado} pesos`);
 
 
 // Capturar fecha de inicio del diplomado
 fechaInicio = new Date();
 
-// Capturar fecha de fin del diplomado
+// Buscar objeto de nivel correspondiente en el arreglo niveles
+let nivel = niveles[nivelElegido - 1];
+
+// Calcular fecha de fin del diplomado
 fechaFin = new Date();
-fechaFin.setMonth(fechaFin.getMonth() + 6);
+fechaFin.setMonth(fechaInicio.getMonth() + nivel.duracion);
 
 console.log("Fecha de inicio del diplomado:", fechaInicio.toLocaleDateString());
 
+console.log(`Duración del diplomado (${nivel.nombre}): ${nivel.duracion} meses`);
+
 console.log("Fecha de fin del diplomado:", fechaFin.toLocaleDateString());
-
-// Capturar costo del diplomado
-costo = 5000;
-
-console.log("Costo del diplomado:", costo);
 
 // Capturar pago del alumno
 let pagoValido = false;
@@ -182,13 +205,16 @@ while (!pagoValido) {
     }
 }
 
+// Buscar el nivel elegido y obtener su duración y costo
+nivelInscripcion = niveles[parseInt(nivelElegido) - 1];
+costo = nivelInscripcion.costo;
+
 console.log("Pago del alumno:", pago);
 
 // Calcular el pago total del alumno
-pagoTotal = pago * 6;
+pagoTotal = costo * duracionDiplomado;
 
-console.log("Pago total del alumno:", pagoTotal);
-
+console.log("Total a pagar por todos los meses:", pagoTotal);
 // Calcular el pago restante del alumno
 pagoRestante = pagoTotal - pago;
 
@@ -196,38 +222,38 @@ console.log("Pago restante del alumno:", pagoRestante);
 
 // Mostrar los datos del alumno en el navegador
 alert(`Nombre del alumno: ${nombres}
-Fecha de nacimiento: ${fechaNacimiento}
-Edad: ${edad}
-Nacionalidad: ${nacionalidad}
-Correo electrónico: ${correo}
-Teléfono: ${telefono}
-Dirección: ${direccion}, ${ciudad}, ${codigoPostal}, ${estado}, ${pais}
-Fecha de inscripción: ${fechaInscripcion.toLocaleDateString()}
-Nivel de inscripción: ${nivelInscripcion}
-Fecha de inicio del diplomado: ${fechaInicio.toLocaleDateString()}
-Fecha de fin del diplomado: ${fechaFin.toLocaleDateString()}
-Costo del diplomado: ${costo}
-Pago del alumno: ${pago}
-Pago total del alumno: ${pagoTotal}
-Pago restante del alumno: ${pagoRestante}`);
+    Fecha de nacimiento: ${fechaNacimiento}
+    Edad: ${edad}
+    Nacionalidad: ${nacionalidad}
+    Correo electrónico: ${correo}
+    Teléfono: ${telefono}
+    Dirección: ${direccion}, ${ciudad}, ${codigoPostal}, ${estado}, ${pais}
+    Fecha de inscripción: ${fechaInscripcion.toLocaleDateString()}
+    Nivel de inscripción: ${nivelInscripcion}
+    Fecha de inicio del diplomado: ${fechaInicio.toLocaleDateString()}
+    Fecha de fin del diplomado: ${fechaFin.toLocaleDateString()}
+    Costo del diplomado: ${costo}
+    Pago del alumno: ${pago}
+    Total a pagar por todos los meses: ${pagoTotal}
+    Pago restante del alumno: ${pagoRestante}`);
 
 // Mostrar los datos del alumno en la consola
 console.log(`Nombre del alumno: ${nombres}
-Fecha de nacimiento: ${fechaNacimiento}
-Edad: ${edad}
-Nacionalidad: ${nacionalidad}
-Correo electrónico: ${correo}
-Teléfono: ${telefono}
-Dirección: ${direccion}, ${ciudad}, ${codigoPostal}, ${estado}, ${pais}
-Fecha de inscripción: ${fechaInscripcion.toLocaleDateString()}
-Nivel de inscripción: ${nivelInscripcion}
-Fecha de inicio del diplomado: ${fechaInicio.toLocaleDateString()}
-Fecha de fin del diplomado: ${fechaFin.toLocaleDateString()}
-Costo del diplomado: ${costo}
-Pago del alumno: ${pago}
-Pago total del alumno: ${pagoTotal}
-Pago restante del alumno: ${pagoRestante}`);
+    Fecha de nacimiento: ${fechaNacimiento}
+    Edad: ${edad}
+    Nacionalidad: ${nacionalidad}
+    Correo electrónico: ${correo}
+    Teléfono: ${telefono}
+    Dirección: ${direccion}, ${ciudad}, ${codigoPostal}, ${estado}, ${pais}
+    Fecha de inscripción: ${fechaInscripcion.toLocaleDateString()}
+    Nivel de inscripción: ${nivelInscripcion}
+    Fecha de inicio del diplomado: ${fechaInicio.toLocaleDateString()}
+    Fecha de fin del diplomado: ${fechaFin.toLocaleDateString()}
+    Costo del diplomado: ${costo}
+    Pago del alumno: ${pago}
+    Total a pagar por todos los meses: ${pagoTotal}
+    Pago restante del alumno: ${pagoRestante}`);
 
 // Dar la bienvenida al diplomado al alumno y dirigirlo a la página para que pueda empezar a tomarlo
-alert(`${nombres}, bienvenido al diplomado para certificarte como Guía Montessori en el nivel ${nivelInscripcion} otorgado por la Asociación Montessori de México`);
+alert(`${nombres}, bienvenido al diplomado para certificarte como Guía Montessori en el nivel ${nivelInscripcion.nombre} otorgado por la Asociación Montessori de México`);
 window.location.href = "https://www.certificacionmontessori.com";
