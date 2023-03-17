@@ -175,7 +175,7 @@ let nivelInscripcion = niveles[nivelElegido - 1];
 duracionDiplomado = nivelInscripcion.duracion;
 let costoDiplomado = nivelInscripcion.costo;
 
-alert(`El alumno se ha inscrito en el nivel ${nivelElegido} - Duración: ${duracionDiplomado} meses - Costo: ${costoDiplomado} pesos`);
+alert(`El alumno se ha inscrito en el nivel ${nivelInscripcion.nombre} - Duración: ${duracionDiplomado} meses - Costo: $${costoDiplomado}.00 pesos mexicanos`);
 
 
 // Capturar fecha de inicio del diplomado
@@ -229,7 +229,7 @@ alert(`Nombre del alumno: ${nombres}
     Teléfono: ${telefono}
     Dirección: ${direccion}, ${ciudad}, ${codigoPostal}, ${estado}, ${pais}
     Fecha de inscripción: ${fechaInscripcion.toLocaleDateString()}
-    Nivel de inscripción: ${nivelInscripcion.nombre}
+    Nivel de inscripción: ${nivel.nombre}
     Fecha de inicio del diplomado: ${fechaInicio.toLocaleDateString()}
     Fecha de fin del diplomado: ${fechaFin.toLocaleDateString()}
     Costo del diplomado: ${costo}
@@ -246,7 +246,7 @@ console.log(`Nombre del alumno: ${nombres}
     Teléfono: ${telefono}
     Dirección: ${direccion}, ${ciudad}, ${codigoPostal}, ${estado}, ${pais}
     Fecha de inscripción: ${fechaInscripcion.toLocaleDateString()}
-    Nivel de inscripción: ${nivelInscripcion.nombre}
+    Nivel de inscripción: ${nivel.nombre}
     Fecha de inicio del diplomado: ${fechaInicio.toLocaleDateString()}
     Fecha de fin del diplomado: ${fechaFin.toLocaleDateString()}
     Costo del diplomado: ${costo}
@@ -254,6 +254,9 @@ console.log(`Nombre del alumno: ${nombres}
     Total a pagar por todos los meses: ${pagoTotal}
     Pago restante del alumno: ${pagoRestante}`);
 
+// Mostrar también la bienvenida  en consola como alerta
+console.warn(`${primerNombre}!, bienvenido al diplomado para certificarte como Guía Montessori en el nivel ${nivelInscripcion.nombre} otorgado por la Asociación Montessori de México`);
+
 // Dar la bienvenida al diplomado al alumno y dirigirlo a la página para que pueda empezar a tomarlo
-alert(`${nombres}, bienvenido al diplomado para certificarte como Guía Montessori en el nivel ${nivelInscripcion.nombre} otorgado por la Asociación Montessori de México`);
+alert(`${primerNombre}!, bienvenido al diplomado para certificarte como Guía Montessori en el nivel ${nivelInscripcion.nombre} otorgado por la Asociación Montessori de México`);
 window.location.href = "https://www.certificacionmontessori.com";
