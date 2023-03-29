@@ -10,12 +10,6 @@ formulario.addEventListener('submit', function (evento) {
   const fechaNacimiento = document.querySelector('#fecha-nacimiento').value.trim();
   const nacionalidad = document.querySelector('#nacionalidad').value.trim();
   const correo = document.querySelector('#correo').value.trim();
-  // Validar Correo usuario @ y dominio
-  const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  if (!regex.test(correo)) {
-    alert('Por favor ingrese un correo electrónico válido.');
-    return;
-  }
   const telefono = document.querySelector('#telefono').value.trim();
   const direccion = document.querySelector('#direccion').value.trim();
   const ciudad = document.querySelector('#ciudad').value.trim();
@@ -29,6 +23,30 @@ formulario.addEventListener('submit', function (evento) {
     alert('Por favor llene todos los campos.');
     return;
   }
+
+  // Calcular la edad del alumno
+  const hoy = new Date();
+  const fechaNacimientoAlumno = new Date(fechaNacimiento);
+  let edad = hoy.getFullYear() - fechaNacimientoAlumno.getFullYear();
+  const mes = hoy.getMonth() - fechaNacimientoAlumno.getMonth();
+  if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimientoAlumno.getDate())) {
+    edad--;
+  }
+
+  // Validar que el alumno tenga al menos 15 años
+  if (edad < 15) {
+    alert('Lo sentimos, debe tener al menos 15 años para inscribirse.');
+    return;
+  }
+
+  // Validar Correo usuario @ y dominio
+  const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  if (!regex.test(correo)) {
+    alert('Por favor ingrese un correo electrónico válido.');
+    return;
+  }
+
+
 
   // Crear objeto alumno
   const alumno = {
