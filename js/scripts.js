@@ -82,8 +82,12 @@ function mostrarAlumnos() {
     alerta.appendChild(document.createTextNode('No hay alumnos inscritos.'));
     listaAlumnos.appendChild(alerta);
   } else {
+    const tablaWrapper = document.createElement('div');
+    tablaWrapper.className = 'table-responsive';
+
     const tabla = document.createElement('table');
-    tabla.className = 'table table-striped';
+    tabla.className = 'table table-striped table-sm';
+
     const encabezado = document.createElement('thead');
     encabezado.innerHTML = `
       <tr>
@@ -130,6 +134,7 @@ function mostrarAlumnos() {
       cuerpo.appendChild(fila);
     });
     tabla.appendChild(cuerpo);
-    listaAlumnos.appendChild(tabla);
+    tablaWrapper.appendChild(tabla);
+    listaAlumnos.appendChild(tablaWrapper);
   }
 }
