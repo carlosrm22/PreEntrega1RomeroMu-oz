@@ -10,6 +10,12 @@ formulario.addEventListener('submit', function (evento) {
   const fechaNacimiento = document.querySelector('#fecha-nacimiento').value.trim();
   const nacionalidad = document.querySelector('#nacionalidad').value.trim();
   const correo = document.querySelector('#correo').value.trim();
+  // Validar Correo usuario @ y dominio
+  const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  if (!regex.test(correo)) {
+    alert('Por favor ingrese un correo electrónico válido.');
+    return;
+  }
   const telefono = document.querySelector('#telefono').value.trim();
   const direccion = document.querySelector('#direccion').value.trim();
   const ciudad = document.querySelector('#ciudad').value.trim();
@@ -47,6 +53,9 @@ formulario.addEventListener('submit', function (evento) {
   alumnos.push(alumno);
   localStorage.setItem('alumnos', JSON.stringify(alumnos));
 
+  // Llamar a mostrarAlumnos() para actualizar la tabla
+  mostrarAlumnos();
+
   // Notificación de que se guardaron los datos del alumno
   const alerta = document.createElement('div');
   alerta.className = 'alert alert-success';
@@ -55,6 +64,7 @@ formulario.addEventListener('submit', function (evento) {
 
   // Limpiar el formulario después de enviarlo
   formulario.reset();
+
 
   // Mostrar la lista de alumnos
   mostrarAlumnos();
