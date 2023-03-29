@@ -8,19 +8,176 @@
         <meta name="viewport"
               content="width=device-width, initial-scale=1.0">
         <title>PreEntrega3Romero</title>
+        <!-- Incluir Bootstrap CSS -->
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <!-- Incluir estilos personalizados -->
         <link rel="stylesheet"
               href="css/styles.css">
     </head>
 
     <body>
-        <header>
-            <h1>PreEntrega3Romero</h1>
-        </header>
-        <main>
+        <!-- Contenido del proyecto -->
+        <header class="container text-center">
+            <h2>PreEntrega3Romero</h2>
             <p>El proyecto consiste simular el proceso de inscripción de alumnos a un Diplomado para certificarse como guía Montessori. </p>
-        </main>
+        </header>
 
-        <script src="js/scripts.js"></script>
+        <main class="container">
+            <div>
+                <h2 class="text-center alert alert-primary">Inscripción a la certificación en Guía Montessori</h2>
+
+                <!-- Formulario de Inscripción -->
+                <form id="formulario"
+                      class="needs-validation"
+                      novalidate>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="nombres">Nombre completo</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="nombres"
+                                   name="nombres"
+                                   required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese su nombre completo.
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="fecha-nacimiento">Fecha de nacimiento</label>
+                            <input type="date"
+                                   class="form-control"
+                                   id="fecha-nacimiento"
+                                   name="fecha-nacimiento"
+                                   required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese su fecha de nacimiento.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="nacionalidad">Nacionalidad</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="nacionalidad"
+                                   name="nacionalidad"
+                                   required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese su nacionalidad.
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="correo">Correo electrónico</label>
+                            <input type="email"
+                                   class="form-control"
+                                   id="correo"
+                                   name="correo"
+                                   required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese su correo electrónico.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel"
+                                   class="form-control"
+                                   id="telefono"
+                                   name="telefono"
+                                   required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese su número de teléfono.
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="direccion">Dirección</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="direccion"
+                                   name="direccion"
+                                   required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese su dirección.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="ciudad">Ciudad</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="ciudad"
+                                   name="ciudad"
+                                   required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese su ciudad.
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="estado">Estado</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="estado"
+                                   name="estado"
+                                   required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese su estado.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="pais">País</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="pais"
+                                   name="pais"
+                                   required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese su país.
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="nivel">Nivel</label>
+                            <select class="form-control"
+                                    id="nivel"
+                                    name="nivel"
+                                    required>
+                                <option value="">Seleccione un nivel</option>
+                                <option value="Diplomado en Comunidad Infantil">Diplomado en Comunidad Infantil</option>
+                                <option value="Diplomado en Casa de Niños">Diplomado en Casa de Niños</option>
+                                <option value="Diplomado en Taller">Diplomado en Taller</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="comentario">Comentarios adicionales</label>
+                        <textarea class="form-control"
+                                  id="comentario"
+                                  name="comentario"
+                                  rows="3"></textarea>
+                    </div>
+                    <div class="text-center mb-5">
+                        <button type="submit"
+                                class="btn btn-primary col-6">Inscribirse</button>
+                    </div>
+        </main>
+        <footer class="text-center mt-2 mb-5 border">
+            <div class="p-2">
+                <p>Todos los derechos reservados</p>
+                <a class="btn btn-info"
+                   href="http://asociacionmontessori.com.mx"
+                   target="_blank">Asociación Montessori de México</a>
+            </div>
+        </footer>
+        <!-- jQuery y Bootstrap JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- JavaScript propio -->
+        <script src="js/script.js"></script>
     </body>
 
 </html>
