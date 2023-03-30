@@ -29,9 +29,11 @@ formulario.addEventListener('submit', function (evento) {
   const fechaNacimientoAlumno = new Date(fechaNacimiento);
   let edad = hoy.getFullYear() - fechaNacimientoAlumno.getFullYear();
   const mes = hoy.getMonth() - fechaNacimientoAlumno.getMonth();
-  if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimientoAlumno.getDate())) {
-    edad--;
+  if (edad < 15 || edad > 120) {
+    alert('Por favor ingrese una fecha de nacimiento válida.');
+    return;
   }
+
 
   // Validar que el alumno tenga al menos 15 años
   if (edad < 15) {
