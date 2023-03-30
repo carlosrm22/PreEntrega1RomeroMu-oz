@@ -80,9 +80,9 @@ formulario.addEventListener('submit', function (evento) {
 
   // Notificación de que se guardaron los datos del alumno
   const alerta = document.createElement('div');
-  alerta.className = 'alert alert-success';
+  alerta.className = 'alert alert-success text-center';
   alerta.appendChild(document.createTextNode('Los datos del alumno han sido guardados correctamente.'));
-  formulario.insertBefore(alerta, formulario.firstChild);
+  formulario.insertBefore(alerta, formulario.lastChild);
 
   // Limpiar el formulario después de enviarlo
   formulario.reset();
@@ -176,12 +176,33 @@ function mostrarAlumnos() {
 
           // Mostrar mensaje de confirmación al usuario
           const alerta = document.createElement('div');
-          alerta.className = 'alert alert-warning';
+          alerta.className = 'alert alert-warning text-center';
           alerta.appendChild(document.createTextNode('El alumno ha sido eliminado correctamente.'));
-          formulario.insertBefore(alerta, formulario.firstChild);
+          formulario.insertBefore(alerta, formulario.lastChild);
 
         }
       });
     });
+    // Agregar event listener para botones de editar
+    const botonesEditar = document.querySelectorAll('.editar');
+    botonesEditar.forEach(function (boton) {
+      boton.addEventListener('click', function () {
+        const indice = this.dataset.indice;
+        const alumno = alumnos[indice];
+        document.querySelector('#nombres').value = alumno.nombres;
+        document.querySelector('#fechaNacimiento').value = alumno.fechaNacimiento;
+        document.querySelector('#nacionalidad').value = alumno.nacionalidad;
+        document.querySelector('#correo').value = alumno.correo;
+        document.querySelector('#telefono').value = alumno.telefono;
+        document.querySelector('#direccion').value = alumno.direccion;
+        document.querySelector('#ciudad').value = alumno.ciudad;
+        document.querySelector('#estado').value = alumno.estado;
+        document.querySelector('#pais').value = alumno.pais;
+        document.querySelector('#nivel').value = alumno.nivel;
+        document.querySelector('#comentario').value = alumno.comentario;
+        document.querySelector('#indice').value = indice;
+      });
+    });
+
   }
 }
