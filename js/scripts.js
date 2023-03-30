@@ -35,11 +35,13 @@ formulario.addEventListener('submit', function (evento) {
   }
 
 
-  // Validar que el alumno tenga al menos 15 años
-  if (edad < 15) {
-    alert('Lo sentimos, debe tener al menos 15 años para inscribirse.');
+  // Validar que el alumno tenga al menos 15 años y máximo 120
+  if (edad < 15 || edad > 120) {
+    alert('Por favor, ingrese una fecha válida.');
     return;
   }
+
+
 
   // Validar Correo usuario @ y dominio
   const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
