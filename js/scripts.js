@@ -34,14 +34,11 @@ formulario.addEventListener('submit', function (evento) {
     return;
   }
 
-
   // Validar que el alumno tenga al menos 15 años y máximo 120
   if (edad < 15 || edad > 120) {
     alert('Por favor, ingrese una fecha válida.');
     return;
   }
-
-
 
   // Validar Correo usuario @ y dominio
   const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -49,8 +46,6 @@ formulario.addEventListener('submit', function (evento) {
     alert('Por favor ingrese un correo electrónico válido.');
     return;
   }
-
-
 
   // Crear objeto alumno
   const alumno = {
@@ -86,7 +81,6 @@ formulario.addEventListener('submit', function (evento) {
 
   // Limpiar el formulario después de enviarlo
   formulario.reset();
-
 
   // Mostrar la lista de alumnos
   mostrarAlumnos();
@@ -162,6 +156,7 @@ function mostrarAlumnos() {
       boton.addEventListener('click', function () {
         const indice = this.dataset.indice;
         if (confirm("¿Estás seguro que deseas eliminar este alumno?")) {
+
           // Eliminar el alumno
           alumnos.splice(indice, 1);
 
@@ -176,7 +171,6 @@ function mostrarAlumnos() {
           alerta.className = 'alert alert-warning text-center';
           alerta.appendChild(document.createTextNode('El alumno ha sido eliminado correctamente.'));
           formulario.insertBefore(alerta, formulario.lastChild);
-
         }
       });
     });
