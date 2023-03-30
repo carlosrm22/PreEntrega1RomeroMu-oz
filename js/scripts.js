@@ -28,7 +28,7 @@ formulario.addEventListener('submit', function (evento) {
   const hoy = new Date();
   const fechaNacimientoAlumno = new Date(fechaNacimiento);
   let edad = hoy.getFullYear() - fechaNacimientoAlumno.getFullYear();
-  const mes = hoy.getMonth() - fechaNacimientoAlumno.getMonth();
+  const mes = hoy.getMonth() - fechaNacimientoAlumno.getMonth(); // no se usa esta constante pero la agrego para hacer el código escalable
   if (edad < 15 || edad > 120) {
     alert('Por favor ingrese una fecha de nacimiento válida.');
     return;
@@ -158,5 +158,30 @@ function mostrarAlumnos() {
     tabla.appendChild(cuerpo);
     tablaWrapper.appendChild(tabla);
     listaAlumnos.appendChild(tablaWrapper);
+
+    // Agregar event listener para botones de eliminar
+    const botonesEliminar = document.querySelectorAll('.eliminar');
+    botonesEliminar.forEach(function (boton) {
+      boton.addEventListener('click', function () {
+        const indice = this.dataset.indice;
+        if (confirm("¿Estás seguro que deseas eliminar este alumno?")) {
+          // Eliminar el alumno
+          alumnos.splice(indice, 1);
+
+          // Actualizar Local Storage con el arreglo de alumnos actualizado
+          localStorage.setItem('alumnos', JSON.stringify(alumnos));
+
+          // Actualizar la tabla de alumnos
+          mostrarAlumnos();
+
+          // Mostrar mensaje de confirmación al usuario
+          const alerta = document.createElement('div');
+          alerta.className = 'alert alert-warning';
+          alerta.appendChild(document.createTextNode('El alumno ha sido eliminado correctamente.'));
+          formulario.insertBefore(alerta, formulario.firstChild);
+
+        }
+      });
+    });
   }
 }
