@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/carlosrm22/PreEntrega3Romero#readme",
   "dependencies": {
-    "bootstrap": "^5.2.3"
+    "bootstrap": "^5.2.3",
+    "sweetalert": "^2.1.2",
+    "toastify-js": "^1.12.0"
   }
 }

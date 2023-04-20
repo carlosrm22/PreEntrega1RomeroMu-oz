@@ -1,3 +1,8 @@
+// se importa sweetalert
+import swal from 'sweetalert';
+// Se importa toastify-js
+import Toastify from 'toastify-js'
+
 // Capturar el formulario
 const formulario = document.querySelector('#formulario');
 
