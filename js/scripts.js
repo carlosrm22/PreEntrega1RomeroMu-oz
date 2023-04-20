@@ -118,12 +118,6 @@ formulario.addEventListener('submit', function (evento) {
   // Llamar a mostrarAlumnos() para actualizar la tabla
   mostrarAlumnos();
 
-  // Notificación de que se guardaron los datos del alumno
-  const alerta = document.createElement('div');
-  alerta.className = 'alert alert-success text-center';
-  alerta.appendChild(document.createTextNode('Los datos del alumno han sido guardados correctamente.'));
-  formulario.insertBefore(alerta, formulario.lastChild);
-
   // Notificación de que se guardaron los datos del alumno usando sweet
   Swal.fire({
     position: 'center',
@@ -209,27 +203,37 @@ function mostrarAlumnos() {
     botonesEliminar.forEach(function (boton) {
       boton.addEventListener('click', function () {
         const indice = this.dataset.indice;
-        if (confirm("¿Estás seguro que deseas eliminar este alumno?")) {
+        Swal.fire({
+          title: '¿Estás seguro que deseas eliminar este alumno?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí, eliminar!',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Eliminar el alumno
+            alumnos.splice(indice, 1);
 
-          // Eliminar el alumno
-          alumnos.splice(indice, 1);
+            // Actualizar Local Storage con el arreglo de alumnos actualizado
+            localStorage.setItem('alumnos', JSON.stringify(alumnos));
 
-          // Actualizar Local Storage con el arreglo de alumnos actualizado
-          localStorage.setItem('alumnos', JSON.stringify(alumnos));
+            // Actualizar la tabla de alumnos
+            mostrarAlumnos();
 
-          // Actualizar la tabla de alumnos
-          mostrarAlumnos();
-
-          // Mostrar mensaje de confirmación al usuario
-          const alerta = document.createElement('div');
-          alerta.className = 'alert alert-warning text-center';
-          alerta.appendChild(document.createTextNode('El alumno ha sido eliminado correctamente.'));
-          formulario.insertBefore(alerta, formulario.lastChild);
-        }
+            // Mostrar mensaje de confirmación al usuario
+            Swal.fire({
+              title: 'Eliminado!',
+              text: 'El alumno ha sido eliminado correctamente.',
+              icon: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+        });
       });
     });
   }
 }
-
 // Llamar a mostrarAlumnos() para mostrar la lista de alumnos
 mostrarAlumnos();
