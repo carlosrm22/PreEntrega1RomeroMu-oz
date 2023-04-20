@@ -1,8 +1,3 @@
-// se importa sweetalert
-import swal from 'sweetalert';
-// Se importa toastify-js
-import Toastify from 'toastify-js'
-
 // Capturar el formulario
 const formulario = document.querySelector('#formulario');
 
@@ -25,7 +20,18 @@ formulario.addEventListener('submit', function (evento) {
 
   // Validar los datos del formulario
   if (nombres === '' || fechaNacimiento === '' || nacionalidad === '' || correo === '' || telefono === '' || direccion === '' || ciudad === '' || estado === '' || pais === '' || nivel === '') {
-    alert('Por favor llene todos los campos.');
+    // Alerta con Toastify JS
+    Toastify({
+      text: 'Por favor, rellena todos los campos.',
+      duration: 3000,
+      close: true,
+      gravity: 'top',
+      position: 'right',
+      backgroundColor: 'linear-gradient(to right, #ff5f6d, #ffc371)',
+      stopOnFocus: true,
+      color: '#ffffff',
+      onClick: function () { }
+    }).showToast();
     return;
   }
 
@@ -35,20 +41,54 @@ formulario.addEventListener('submit', function (evento) {
   let edad = hoy.getFullYear() - fechaNacimientoAlumno.getFullYear();
   const mes = hoy.getMonth() - fechaNacimientoAlumno.getMonth(); // no se usa esta constante pero la agrego para hacer el código escalable
   if (edad < 15 || edad > 120) {
-    alert('Por favor ingrese una fecha de nacimiento válida.');
+    // alerta usando toastify js
+    Toastify({
+      text: 'Por favor ingrese una fecha de nacimiento válida.',
+      duration: 3000,
+      close: true,
+      gravity: 'top',
+      position: 'right',
+      backgroundColor: 'linear-gradient(to right, #ff5f6d, #ffc371)',
+      stopOnFocus: true,
+      color: '#ffffff',
+      onClick: function () { }
+    }).showToast();
+
     return;
   }
 
   // Validar que el alumno tenga al menos 15 años y máximo 120
   if (edad < 15 || edad > 120) {
-    alert('Por favor, ingrese una fecha válida.');
+    // alerta usando toastify js
+    Toastify({
+      text: 'Por favor ingrese una fecha de nacimiento válida.',
+      duration: 3000,
+      close: true,
+      gravity: 'top',
+      position: 'right',
+      backgroundColor: 'linear-gradient(to right, #ff5f6d, #ffc371)',
+      stopOnFocus: true,
+      color: '#ffffff',
+      onClick: function () { }
+    }).showToast();
     return;
   }
 
   // Validar Correo usuario @ y dominio
   const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   if (!regex.test(correo)) {
-    alert('Por favor ingrese un correo electrónico válido.');
+    // alerta usando toastify js
+    Toastify({
+      text: 'Por favor ingrese correo electrónico valido.',
+      duration: 3000,
+      close: true,
+      gravity: 'top',
+      position: 'right',
+      backgroundColor: 'linear-gradient(to right, #ff5f6d, #ffc371)',
+      stopOnFocus: true,
+      color: '#ffffff',
+      onClick: function () { }
+    }).showToast();
     return;
   }
 
@@ -83,6 +123,15 @@ formulario.addEventListener('submit', function (evento) {
   alerta.className = 'alert alert-success text-center';
   alerta.appendChild(document.createTextNode('Los datos del alumno han sido guardados correctamente.'));
   formulario.insertBefore(alerta, formulario.lastChild);
+
+  // Notificación de que se guardaron los datos del alumno usando sweet
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Los datos del alumno han sido guardados correctamente.',
+    showConfirmButton: false,
+    timer: 2000
+  })
 
   // Limpiar el formulario después de enviarlo
   formulario.reset();
