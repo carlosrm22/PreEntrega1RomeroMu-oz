@@ -1,6 +1,6 @@
-# Entrega Final Romero
+# Proyecto Final Romero
 
- **Entrega Final** de la cursada de *JavaScript en CoderHouse.*
+ **Proyecto Final** de la cursada de *JavaScript en CoderHouse.*
 Por: Carlos Alfonso Romero Muñoz
 
 ## Objetivo
