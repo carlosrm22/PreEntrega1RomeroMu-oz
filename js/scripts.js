@@ -173,7 +173,7 @@ formulario.addEventListener('submit', function (evento) {
   // Llamar a mostrarAlumnos() para actualizar la tabla
   mostrarAlumnos();
 
-  // Notificación de que se guardaron los datos del alumno usando sweet
+  // Notificación de que se guardaron los datos del alumno usando sweet alert
   Swal.fire({
     position: 'center',
     icon: 'success',
