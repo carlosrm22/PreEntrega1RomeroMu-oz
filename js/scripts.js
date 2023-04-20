@@ -74,6 +74,34 @@ formulario.addEventListener('submit', function (evento) {
     return;
   }
 
+  // Consumir la API de países para validar la nacionalidad
+  fetch(`https://restcountries.eu/rest/v2/name/${nacionalidad}`)
+    .then(function (respuesta) {
+      return respuesta.json();
+    })
+    .then(function (datos) {
+      if (datos.status === 404) {
+        // alerta usando toastify js
+        Toastify({
+          text: 'Por favor ingrese una nacionalidad válida.',
+          duration: 3000,
+          close: true,
+          gravity: 'top',
+          position: 'right',
+          backgroundColor: 'linear-gradient(to right, #ff5f6d, #ffc371)',
+          stopOnFocus: true,
+          color: '#ffffff',
+          onClick: function () { }
+        }).showToast();
+      }
+    })
+    .catch(function (error) {
+      if (error) {
+        console.log("No se validó la nacionalidad");
+      }
+    });
+
+
   // Validar Correo usuario @ y dominio
   const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   if (!regex.test(correo)) {
@@ -91,6 +119,33 @@ formulario.addEventListener('submit', function (evento) {
     }).showToast();
     return;
   }
+
+  // validar correo consumiendo una api
+  fetch(`https://isitarealemail.com/api/email/validate?email=${correo}`)
+    .then(function (respuesta) {
+      return respuesta.json();
+    })
+    .then(function (datos) {
+      if (datos.status === 'invalid') {
+        // alerta usando toastify js
+        Toastify({
+          text: 'Por favor ingrese correo electrónico valido.',
+          duration: 3000,
+          close: true,
+          gravity: 'top',
+          position: 'right',
+          backgroundColor: 'linear-gradient(to right, #ff5f6d, #ffc371)',
+          stopOnFocus: true,
+          color: '#ffffff',
+          onClick: function () { }
+        }).showToast();
+      }
+    })
+    .catch(function (error) {
+      if (error) {
+        console.error(error);
+      }
+    });
 
   // Crear objeto alumno
   const alumno = {
@@ -134,8 +189,8 @@ formulario.addEventListener('submit', function (evento) {
   mostrarAlumnos();
 });
 
-// Función para mostrar la lista de alumnos
-function mostrarAlumnos() {
+// Función para mostrar la lista de alumnos usando asincronía
+async function mostrarAlumnos() {
   const alumnos = JSON.parse(localStorage.getItem('alumnos'));
   const listaAlumnos = document.querySelector('#listaAlumnos');
   listaAlumnos.innerHTML = '';
@@ -237,3 +292,124 @@ function mostrarAlumnos() {
 }
 // Llamar a mostrarAlumnos() para mostrar la lista de alumnos
 mostrarAlumnos();
+
+// Función para exportar los datos en formato de lista string
+function exportarTxt() {
+  const alumnos = JSON.parse(localStorage.getItem('alumnos'));
+  const lista = alumnos.map(function (alumno) {
+    return `Nombre: ${alumno.nombres}
+Fecha de nacimiento: ${alumno.fechaNacimiento}
+Nacionalidad: ${alumno.nacionalidad}
+Correo electrónico: ${alumno.correo}
+Teléfono: ${alumno.telefono}
+Dirección: ${alumno.direccion}
+Ciudad: ${alumno.ciudad}
+Estado: ${alumno.estado}
+País: ${alumno.pais}
+Nivel: ${alumno.nivel}
+Comentarios adicionales: ${alumno.comentario}
+`;
+  });
+  const texto = lista.join('  \n');
+  const blob = new Blob([texto], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.setAttribute('download', 'alumnos.txt');
+  link.setAttribute('href', url);
+  link.click();
+}
+
+
+// Función para exportar los datos de los alumnos a un archivo .json
+function exportar() {
+  const alumnos = JSON.parse(localStorage.getItem('alumnos'));
+  const json = JSON.stringify(alumnos);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.setAttribute('download', 'alumnos.json');
+  link.setAttribute('href', url);
+  link.click();
+}
+
+// Usar la función exportar para descargar los datos usando el botón html
+const botonExportar = document.querySelector('#exportar');
+// pedir confirmación de descarga con sweet alert
+botonExportar.addEventListener('click', function () {
+  Swal.fire({
+    title: '¿Estás seguro que deseas exportar los datos de los alumnos en formato .json?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, exportar!',
+    cancelButtonText: 'Cancelar, no se puede en excel mejor?'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      exportar();
+      Swal.fire({
+        title: 'Exportado!',
+        text: 'Los datos de los alumnos han sido exportados correctamente.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      });
+    }
+    // acción si el usuario cancela
+    else {
+      Swal.fire({
+        title: 'No usamos Excel, aprende JavaScript!',
+        text: '(el archivo se descargará en formato .txt)',
+        icon: 'error',
+        confirmButtonText: 'Ok, aprenderé JavaScript'
+        // abrir en una nueva pestaña la página de cursos de javascript de CoderHouse si el usuario confirma
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.open('https://www.coderhouse.com.mx/online/javascript');
+          exportarTxt();
+          Swal.fire({
+            title: 'Exportado!',
+            text: 'Los datos de los alumnos han sido exportados correctamente en formato .txt.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            stopKeydownPropagation: false
+          });
+        }
+      });
+    }
+  });
+});
+
+
+// Función para eliminar todos los alumnos
+function eliminarAlumnos() {
+  localStorage.clear();
+  mostrarAlumnos();
+}
+
+// Usar la función eliminarAlumnos para eliminar los datos usando el botón html
+const botonEliminar = document.querySelector('#eliminar');
+botonEliminar.addEventListener('click', function () {
+  Swal.fire({
+    title: '¿Estás seguro que deseas eliminar todos los alumnos? Esta acción no se puede deshacer.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, eliminar!',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      eliminarAlumnos();
+      Swal.fire({
+        title: 'Eliminados!',
+        text: 'Todos los alumnos han sido eliminados correctamente.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      });
+    }
+  });
+}
+);
