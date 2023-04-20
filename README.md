@@ -1,6 +1,6 @@
-# PreEntrega3Romero
+# Entrega Final Romero
 
- **Tercera Pre Entrega** de la cursada de *JavaScript en CoderHouse.*
+ **Entrega Final** de la cursada de *JavaScript en CoderHouse.*
 Por: Carlos Alfonso Romero Muñoz
 
 ## Objetivo
